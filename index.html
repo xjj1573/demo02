@@ -16,23 +16,96 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="index.css">
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-            <div id="nav">
-                <span class="link"></span>
-                <img src="" alt="">
-            </div>
-        <script src="" async defer></script>
-    </body>
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>vue入门</title>
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="index.css" />
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+	<!--[if lt IE 7]>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="#">upgrade your browser</a> to improve your experience.
+      </p>
+    <![endif]-->
+	<div id="nav">
+		<span class="link"></span>
+		<img src="" alt="" />
+	</div>
+
+	<div id="root">
+		<!-- <h1>hello {{msg}}{{number}}</h1> -->
+		<!-- <div v-html="content" ></div> -->
+		<div v-on:click="()=>{alert(123)}">{{content}}</div>
+		<div v-on:click="handleClick">{{content}}</div>
+		<div title="thist is helloworld">helloworld</div>
+		<div v-bind:title="'dell lee '+title">helloworld</div>
+		<div :title="'dell lee '+title">helloworld</div>
+		<div  @click="handleClick">{{content}}</div>
+		<input v-model="content"/>
+		姓:<input v-model="firstName"/>
+		名:<input v-model="lastName"/>
+		<div>{{firstName}} {{lastName}}</div>
+		<div>{{fullName}} </div>
+		<div v-if="show">{{count}} </div>
+		<button @click="handleClick2">toggle</button>
+		<div v-show="show">{{count}} </div>
+		<ul>
+			<li v-for="(item,index) of list" :key="index">{{item}}</li>
+		</ul>
+	</div>
+	<script>
+		new Vue({
+			el: "#root",
+			// template:'<h1>hello {{msg}}</h1>',
+			data: {
+				// msg: "hello world",
+				// number:123
+				content:"hello",
+				title:"thist is helloworld",
+				firstName:'',
+				lastName:'',
+				count:0,
+				show:true,
+				list:[1,2,3,1,2]
+			},
+			computed:{
+				fullName:function(){
+					return this.firstName+' '+this.lastName
+				}
+			},
+			watch:{
+				/* firstName:function(){
+					this.count++;
+				},
+				lastName:function(){
+					this.count++;
+				}, */
+				fullName:function(){
+					return this.count++;
+				}
+
+			},
+			methods:{
+				handleClick:function(){
+					// alert(123)
+					this.content="world"
+				},
+				handleClick2:function(){
+					this.show=false
+				}
+			}
+		});
+	</script>
+</body>
+
 </html>
